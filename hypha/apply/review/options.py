@@ -25,6 +25,20 @@ RECOMMENDATION_CHOICES = (
     (YES, _("Yes")),
 )
 
+NO_RECOMMENDATIONS = [NO]
+MAYBE_RECOMMENDATIONS = [MAYBE]
+YES_RECOMMENDATIONS = [YES]
+
+
+def map_recommendation(raw_recommendation):
+    if raw_recommendation in NO_RECOMMENDATIONS:
+        return NO
+    if raw_recommendation in YES_RECOMMENDATIONS:
+        return YES
+    if raw_recommendation in MAYBE_RECOMMENDATIONS:
+        return MAYBE
+
+
 DISAGREE = 0
 AGREE = 1
 

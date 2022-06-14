@@ -33,6 +33,7 @@ from .options import (
     REVIEWER,
     VISIBILITY,
     YES,
+    map_recommendation,
 )
 
 
@@ -131,7 +132,10 @@ class ReviewQuerySet(models.QuerySet):
         if any(opinion == DISAGREE for opinion in opinions):
             return MAYBE
 
-        recommendations = self.values_list("recommendation", flat=True)
+        raw_recommendations = self.values_list("recommendation", flat=True)
+        recommendations = [
+            map_recommendation(recommendation) for recommendation in raw_recommendations
+        ]
         try:
             recommendation = sum(recommendations) / len(recommendations)
         except ZeroDivisionError:
