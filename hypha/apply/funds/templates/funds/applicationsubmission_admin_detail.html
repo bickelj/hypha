@@ -44,7 +44,7 @@
 
 {% block reviews %}
     <div class="sidebar__inner">
-        <h5>{% trans "Reviews & assignees" %}</h5>
+        <h5 class="sidebar__inner--heading">{% trans "Reviews & assignees" %} <span class="arrow"></span> </h5>
 
         <div hx-trigger="revealed" hx-get="{% url "funds:submissions:partial-reviews-card" object.id %}" hx-target="this">
             <div class="animate-pulse min-h-30">
