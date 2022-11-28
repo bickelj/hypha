@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.utils.translation import gettext as _
 
 NA = 99
@@ -18,16 +19,20 @@ RATE_CHOICE_NA = RATE_CHOICES_DICT[NA]
 NO = 0
 MAYBE = 1
 YES = 2
+recommendations = getattr(settings, "RECOMMENDATION_CHOICES", {})
 
-RECOMMENDATION_CHOICES = (
-    (NO, _("No")),
-    (MAYBE, _("Maybe")),
-    (YES, _("Yes")),
+RECOMMENDATION_CHOICES = recommendations.get(
+    "CHOICES",
+    (
+        (NO, _("No")),
+        (MAYBE, _("Maybe")),
+        (YES, _("Yes")),
+    ),
 )
 
-NO_RECOMMENDATIONS = [NO]
-MAYBE_RECOMMENDATIONS = [MAYBE]
-YES_RECOMMENDATIONS = [YES]
+NO_RECOMMENDATIONS = recommendations.get("NO", [NO])
+MAYBE_RECOMMENDATIONS = recommendations.get("MAYBE", [MAYBE])
+YES_RECOMMENDATIONS = recommendations.get("YES", [YES])
 
 
 def map_recommendation(raw_recommendation):
